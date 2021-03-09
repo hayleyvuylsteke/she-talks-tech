@@ -49,6 +49,28 @@ router.post('/', (req, res) => {
     })
 })
 
+// Login route
+router.post('/login', (req, res) => {
+    User.findOne({
+        where: {
+            username: req.body.username
+        }
+    })
+    .then(dbUserData => {
+        if (!dbUserData) {
+            res.status(400).json({ message: 'Sorry! No user was found with that username.'})
+            return
+        }
+        const validPassword = dbUserData.checkPassword(req.body.password);
+        if (!validPassword) {
+            res.status(400).json({ message: 'Whoops! The password entered is incorrect.'})
+            return
+        }
+        res.json({ user: dbUserData, message: 'You are now logged in!'})
+    })
+  
+  })
+
 // Updates a user
 router.put('/:id', (req, res) => {
     User.update(req.body, {
