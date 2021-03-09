@@ -32,7 +32,7 @@ router.get('/:id', (req, res) => {
                 attributes: ['id', 'comment_text', 'created_at'],
                 include: {
                     model: BlogPost,
-                    attributes: ['title']
+                    attributes: ['post_title']
                 }
             }
         ]
