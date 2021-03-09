@@ -1,5 +1,6 @@
 const router = require('express').Router();
-const { User } = require('../../models');
+const { User, BlogPost, Comment } = require('../../models');
+const { post } = require('./comment-routes');
 
 // Gets all users from the user table in the database and sends back in JSON
 router.get('/', (req, res) => {
@@ -20,7 +21,21 @@ router.get('/:id', (req, res) => {
 
         where: {
             id: req.params.id
-        }
+        },
+        include: [
+            {
+                model: BlogPost, 
+                attributes: ['id', 'post_title', 'post_content', 'created_at']
+            },
+            {
+                model: Comment,
+                attributes: ['id', 'comment_text', 'created_at'],
+                include: {
+                    model: BlogPost,
+                    attributes: ['title']
+                }
+            }
+        ]
     })
     .then(dbUserData => {
         if (!dbUserData) {

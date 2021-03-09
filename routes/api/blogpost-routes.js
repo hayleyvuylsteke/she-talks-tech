@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { BlogPost, User } = require('../../models')
+const { BlogPost, User, Comment } = require('../../models')
 
 //Gets all blog posts
 router.get('/', (req,res) => {
@@ -8,10 +8,19 @@ router.get('/', (req,res) => {
         order: [['created_at', 'DESC']],
         include: [
             {
-                model: User,
-                attributes: ['username']
+                model: Comment,
+                attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
+
+                include: {
+                    model: User,
+                    attributes: ['username']
             }
-        ]
+        },
+        {
+            model: User,
+            attributes: ['username']
+        }
+    ]
     })
     .then(dbBlogPostData => res.json(dbBlogPostData))
     .catch(err => {
@@ -31,10 +40,19 @@ router.get('/:id', (req, res) => {
         attributes: ['id', 'post_title', 'post_content', 'created_at'],
         include: [
             {
-                model: User,
-                attributes: ['username']
+                model: Comment,
+                attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
+
+                include: {
+                    model: User,
+                    attributes: ['username']
             }
-        ]
+        },
+        {
+            model: User,
+            attributes: ['username']
+        }
+    ]
     })
     .then(dbBlogPostData => {
         if (!dbBlogPostData) {
