@@ -1,20 +1,19 @@
-
-<ol class="blog-post-list">
-  {{#each posts as |blogpost|}}
-  <li>
-    <article class="blog-post">
-      <div class="blog-post-title">
-        <p>{{blogpost.post_title}}</p>
-        <span>({{blogpost.post_content}})</span>
+  <div class="row">
+    <div class="col s12 m7">
+      {{#each posts as |blogpost|}}
+      <div class="card">
+        <div class="card-image">
+          <img src="images/sample-1.jpg">
+          <span class="card-title">{{blogpost.post_title}}</span>
+        </div>
+        <div class="card-content">
+          <p>By {{blogpost.user.username}} on {{blogpost.created_at}}</p>
+          <p>{{blogpost.post_content}}</p>
+        </div>
+        <div class="card-action">
+          <a href="/post/{{blogpost.id}}">READ MORE</a>
+        </div>
       </div>
-      <div class="meta">
-        By {{blogpost.user.username}} on {{blogpost.created_at}}
-        |
-        <a href="/post/{{blogpost.id}}">{{blogpost.comment.length}} comment(s)</a>
-      </div>
-    </article>
-  </li>
-  {{/each}}
-</ol>
-
-
+      {{/each}}
+    </div>
+  </div>
