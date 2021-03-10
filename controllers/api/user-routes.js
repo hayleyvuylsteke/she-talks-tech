@@ -57,7 +57,15 @@ router.post('/', (req, res) => {
         email: req.body.email,
         password: req.body.password
     })
-    .then(dbUserData => res.json(dbUserData))
+    .then(dbUserData => {
+        req.session.save(() => {
+          req.session.user_id = dbUserData.id;
+          req.session.username = dbUserData.username;
+          req.session.loggedIn = true;
+      
+          res.json(dbUserData);
+        });
+      })      
     .catch(err => {
         console.log(err)
         res.status(500).json(err)
@@ -67,24 +75,47 @@ router.post('/', (req, res) => {
 // Login route
 router.post('/login', (req, res) => {
     User.findOne({
-        where: {
-            username: req.body.username
-        }
-    })
-    .then(dbUserData => {
-        if (!dbUserData) {
-            res.status(400).json({ message: 'Sorry! No user was found with that username.'})
-            return
-        }
-        const validPassword = dbUserData.checkPassword(req.body.password);
-        if (!validPassword) {
-            res.status(400).json({ message: 'Whoops! The password entered is incorrect.'})
-            return
-        }
-        res.json({ user: dbUserData, message: 'You are now logged in!'})
-    })
+      where: {
+        username: req.body.username
+      }
+    }).then(dbUserData => {
+      if (!dbUserData) {
+        res.status(400).json({ message: 'Sorry! No user was found with that username!' });
+        Return;
+      }
   
-  })
+      const validPassword = dbUserData.checkPassword(req.body.password);
+  
+      if (!validPassword) {
+        res.status(400).json({ message: 'Sorry! Incorrect password!' });
+        Return;
+      }
+  
+      req.session.save(() => {
+        // declare session variables
+        req.session.user_id = dbUserData.id;
+        req.session.username = dbUserData.username;
+        req.session.loggedIn = true;
+  
+        res.json({ user: dbUserData, message: 'You are now logged in!' });
+      });
+    });
+  });
+
+//Logout Route
+router.post('/logout', (req, res) => {
+    if (req.session.loggedIn) {
+        req.session.destroy(() => {
+          res.status(204).end();
+        });
+      }
+      else {
+        res.status(404).end();
+      }
+    
+});
+
+  
 
 // Updates a user
 router.put('/:id', (req, res) => {
