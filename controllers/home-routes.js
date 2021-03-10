@@ -32,6 +32,7 @@ router.get('/', (req, res) => {
       ]
     })
       .then(dbPostData => {
+        console.log(dbPostData)
         res.render('homepage', dbPostData[0].get({ plain: true }));
       })
       .catch(err => {
