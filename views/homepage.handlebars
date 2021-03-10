@@ -1,0 +1,20 @@
+
+<ol class="blog-post-list">
+  {{#each posts as |blogpost|}}
+  <li>
+    <article class="blog-post">
+      <div class="blog-post-title">
+        <p>{{blogpost.post_title}}</p>
+        <span>({{blogpost.post_content}})</span>
+      </div>
+      <div class="meta">
+        By {{blogpost.user.username}} on {{blogpost.created_at}}
+        |
+        <a href="/post/{{blogpost.id}}">{{blogpost.comment.length}} comment(s)</a>
+      </div>
+    </article>
+  </li>
+  {{/each}}
+</ol>
+
+
