@@ -80,19 +80,18 @@ router.post('/login', (req, res) => {
       }
     }).then(dbUserData => {
       if (!dbUserData) {
-        res.status(400).json({ message: 'Sorry! No user was found with that username!' });
-        Return;
+        res.status(400).json({ message: 'Sorry! No user was found with that username!' })
+        return
       }
   
       const validPassword = dbUserData.checkPassword(req.body.password);
   
       if (!validPassword) {
         res.status(400).json({ message: 'Sorry! Incorrect password!' });
-        Return;
+        return
       }
   
       req.session.save(() => {
-        // declare session variables
         req.session.user_id = dbUserData.id;
         req.session.username = dbUserData.username;
         req.session.loggedIn = true;

@@ -30,6 +30,7 @@
 </div>
 </article>
 <br>
+  {{#if loggedIn}}
   <form class="comment-form col s12">
   <div class="row">
     <div class="input-field col s12">
@@ -42,5 +43,8 @@
     <button class="btn" style="background-color: #e831c3" type="submit">add comment</button>
   </div>
 </form>
+{{/if}}
 <br>
+{{#if loggedIn}}
 <script src="/javascript/comment.js"></script>
+{{/if}}
