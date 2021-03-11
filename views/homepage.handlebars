@@ -11,7 +11,7 @@
           <p class="card-title" style="font-weight: bold">{{post_title}}</p>
           <p>By {{user.username}} on {{format_date created_at}}</p>
           <p>{{post_content}}</p>
-          <a href="/post/{{id}}" style="color:#e831c3">{{comments.length}} comment(s)</a>
+          <a href="/post/{{id}}" style="color:#e831c3">{{comments.length}} {{format_plural "comment" comments.length}}</a>
         </div>
         <div class="card-action">
           <a href="/post/{{id}}" style="color:#d19fe4">READ MORE</a>
