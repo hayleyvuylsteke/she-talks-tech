@@ -4,6 +4,11 @@ page-nav {
     background-color: #ffffff;
 }
 
+nav-link {
+    color: #000; 
+    font-weight: bold
+}
+
 page-foot {
     color: #000000;
     background-color: #f2b6eb
