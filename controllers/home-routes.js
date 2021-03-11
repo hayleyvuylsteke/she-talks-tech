@@ -7,38 +7,39 @@ const { BlogPost, User, Comment } = require('../models');
 
 //homepage route
 router.get('/', (req, res) => {
-    console.log(req.session);
-    BlogPost.findAll({
-      attributes: [
-        'id',
-        'post_title',
-        'post_content',
-        'Created_at',
-      ],
-      include: [
-        {
-          model: Comment,
-          attributes: ['id', 'comment_text', 'post_id', 
-  'user_id', 'created_at'],
-          include: {
-            model: User,
-            attributes: ['username']
-          }
-        },
-        {
+  BlogPost.findAll({
+    attributes: [
+      'id',
+      'post_title',
+      'post_content',
+      'created_at',
+    ],
+    include: [
+      {
+        model: Comment,
+        attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
+        include: {
           model: User,
           attributes: ['username']
         }
-      ]
-    })
+      },
+      {
+        model: User,
+        attributes: ['username']
+      }
+    ]
+  })
     .then(dbPostData => {
-        res.render('homepage', dbPostData[0].get({ plain: true }))
+      // pass a single post object into the homepage template
+      const posts = dbPostData.map(post => post.get({ plain: true }));
+      res.render('homepage', { posts });
     })
     .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-      });
-  });
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
+
 
 //Login route
 router.get('/login', (req, res) => {
