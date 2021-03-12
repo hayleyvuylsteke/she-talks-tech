@@ -1,7 +1,7 @@
 //front-end login JS
 
 //Signup handler
-async function signupFormHandler(event) {
+/*async function signupFormHandler(event) {
     event.preventDefault();
   
     const username = document.querySelector('#username-signup').value.trim();
@@ -24,7 +24,7 @@ async function signupFormHandler(event) {
         alert(response.statusText);
       }
     }
-  }
+  }*/
 
 //Login Handler
 async function loginFormHandler(event) {
@@ -51,5 +51,5 @@ async function loginFormHandler(event) {
     }
   }
 
-document.querySelector('.signup-form').addEventListener('submit', signupFormHandler);
+//document.querySelector('.signup-form').addEventListener('submit', signupFormHandler);
 document.querySelector('.login-form').addEventListener('submit', loginFormHandler);

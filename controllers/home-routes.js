@@ -48,13 +48,18 @@ router.get('/', (req, res) => {
 //Login route
 router.get('/login', (req, res) => {
     if (req.session.loggedIn) {
-      res.redirect('/');
+     res.redirect('/');
       return;
     }
   
     res.render('login');
   });
-  
+
+//Login route
+router.get('/signup', (req, res) => {
+  res.render('signup');
+});
+
 //Single Post Route
 router.get('/post/:id', (req, res) => {
   BlogPost.findOne({

@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const { User, BlogPost, Comment } = require('../../models');
-const { post } = require('./comment-routes');
 const withAuth = require('../../utils/auth');
 
 // Gets all users from the user table in the database and sends back in JSON
@@ -85,16 +84,16 @@ router.post('/login', (req, res) => {
         return
       }
   
-      const validPassword = dbUserData.checkPassword(req.body.password);
+      const validPassword = dbUserData.checkPassword(req.body.password)
   
       if (!validPassword) {
-        res.status(400).json({ message: 'Sorry! Incorrect password!' });
+        res.status(400).json({ message: 'Sorry! Incorrect password!' })
         return
       }
   
       req.session.save(() => {
-        req.session.user_id = dbUserData.id;
-        req.session.username = dbUserData.username;
+        req.session.user_id = dbUserData.id
+        req.session.username = dbUserData.username
         req.session.loggedIn = true;
   
         res.json({ user: dbUserData, message: 'You are now logged in!' });
