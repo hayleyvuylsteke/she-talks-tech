@@ -1,0 +1,53 @@
+<br>
+<article>
+  <a href="/dashboard" style="color:#d19fe4"> &larr; Back to dashboard</a>
+  <h2 style="color:#d19fe4; font-weight:bold">
+    Edit Post
+  </h2>
+  <form class="edit-post-form">
+    <div>
+      <input style="font-weight: bold" name="post-title" type="text" value="{{post.post_title}}" />
+      <textarea name="post-content">{{post.post_content}}</textarea>
+    </div>
+    <div>
+     By <b>you </b> on {{format_date post.created_at}} | <a href="/post/{{post.id}}">{{post.comments.length}} {{format_plural "comment" post.comments.length}}</a>
+      <br>
+      <br>
+
+    </div>
+    <button type="submit" style="background-color: #e831c3" class="btn">Save post</button>
+    <button type="button" class="delete-post-btn btn" style="background-color: #e831c3" >Delete post</button>
+  </form>
+</article>
+  <h5 style="font-weight:bold">
+    Comments
+  </h5>
+   <div class="comments">
+  {{#each post.comments}}
+  <section class="comment">
+    <div class="meta">
+     <b>{{user.username}}</b> | {{format_date created_at}}
+    </div>
+    <div class="text">
+      {{comment_text}}
+      <br>
+      <div class="divider"></div>
+    </div>
+  </section>
+  {{/each}}
+</div>
+<form class="comment-form">
+  <br>
+   <div class="divider"></div>
+  <div>
+    <textarea name="comment-body"></textarea>
+  </div>
+
+  <div>
+    <button type="submit" style="background-color: #e831c3" class="btn">add comment</button>
+  </div>
+</form>
+<br>
+<script src="/javascript/edit-post.js"></script>
+<script src="/javascript/delete-post.js"></script>
+<script src="/javascript/comment.js"></script>

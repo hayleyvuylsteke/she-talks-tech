@@ -15,3 +15,29 @@
   </form>
   <br>
 </section>
+
+{{#if posts.length}}
+<section>
+  <h2>Your Posts</h2>
+  <div class="row">
+      {{#each posts}}
+     <div class="col s12 m4 l3">
+      <div class="card">
+        <div class="card-content">
+          <p class="card-title" style="font-weight: bold">{{post.post_title}}</p>
+          <p>By {{user.username}} on {{format_date post.created_at}}</p>
+          <p>{{post.post_content}}</p>
+          <a href="/post/{{post.id}}" style="color:#e831c3">{{comments.length}} {{format_plural "comment" comments.length}}</a>
+        </div>
+        <div class="card-action">
+          <a href="/dashboard.edit{{post.id}}" class="edit-link" style="color:#d19fe4">EDIT POST</a>
+        </div>
+      </div>
+      </div>
+      {{/each}}
+  </div>
+
+</section>
+{{/if}}
+
+<script src="/javascript/add-post.js"></script>

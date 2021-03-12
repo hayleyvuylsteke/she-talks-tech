@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { User, BlogPost, Comment } = require('../../models');
 const { post } = require('./comment-routes');
+const withAuth = require('../../utils/auth');
 
 // Gets all users from the user table in the database and sends back in JSON
 router.get('/', (req, res) => {
@@ -117,7 +118,7 @@ router.post('/logout', (req, res) => {
   
 
 // Updates a user
-router.put('/:id', (req, res) => {
+router.put('/:id', withAuth, (req, res) => {
     User.update(req.body, {
         individualHooks: true,
         where: {
@@ -138,7 +139,7 @@ router.put('/:id', (req, res) => {
 });
 
 // deletes a user
-router.delete('/:id', (req, res) => {
+router.delete('/:id', withAuth, (req, res) => {
     User.destroy({
         where: {
             id: req.params.id
