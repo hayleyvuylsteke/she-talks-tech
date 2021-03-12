@@ -23,7 +23,7 @@ BlogPost.init(
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-          len: [60]
+          len: [10]
         }
       },
       user_id: {
