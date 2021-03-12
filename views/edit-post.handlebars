@@ -7,7 +7,7 @@
   <form class="edit-post-form">
     <div>
       <input style="font-weight: bold" name="post-title" type="text" value="{{post.post_title}}" />
-      <textarea name="post-content">{{post.post_content}}</textarea>
+      <input name="post-content" type="text" value="{{post.post_content}}">
     </div>
     <div>
      By <b>you </b> on {{format_date post.created_at}} | <a href="/post/{{post.id}}">{{post.comments.length}} {{format_plural "comment" post.comments.length}}</a>
