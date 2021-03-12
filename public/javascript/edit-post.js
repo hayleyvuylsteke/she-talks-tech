@@ -2,9 +2,11 @@ async function editFormHandler(event) {
     event.preventDefault();
   
     const post_title = document.querySelector('input[name="post-title"]').value.trim();
-    const post_content = document.querySelector('textarea[name="post_content"]').value.trim();
+    const post_content = document.querySelector('input[name="post_content"]').value.trim();
+    
+    console.log(post_title + "title")
+    console.log(post_content + "postcontent")
     const id = window.location.toString().split('/')[
-      
       window.location.toString().split('/').length - 1
     ];
     console.log("can I see this?" + post_title + post_content + id)
