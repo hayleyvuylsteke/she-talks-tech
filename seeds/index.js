@@ -12,4 +12,4 @@ const seedSite = async() => {
     process.exit(0);
 };
 
-seedSite();
+module.exports = seedSite
