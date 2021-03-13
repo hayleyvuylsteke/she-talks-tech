@@ -1,4 +1,4 @@
-var autoLogout = (async function() {
+var autoLogout = (function() {
   function AutoLogout() {
     this.events = ['load', 'mousemove', 'mousedown' ,'click', 'scroll', 'keypress']
 
@@ -29,7 +29,7 @@ var autoLogout = (async function() {
   }
 
   _t.logout = function() {
-    const response = await fetch('/api/users/logout', {
+    const response = fetch('/api/users/logout', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' }
     });
