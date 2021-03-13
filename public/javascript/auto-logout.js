@@ -18,7 +18,7 @@ function autoLogout() {
  //create a timeout function
  const resetTimeout = () => {
      clearTimeout(timeout);
-     timeout();
+     setTimeout();
  }
 
 
