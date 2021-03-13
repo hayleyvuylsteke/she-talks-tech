@@ -5,7 +5,6 @@ const sequelize = require('./config/connection');
 const session = require('express-session');
 const path = require('path');
 const helpers = require('./utils/helpers');
-const seeds = require('./seeds/index')
 
 //handlebars
 const exphbs = require('express-handlebars');
@@ -42,8 +41,7 @@ app.use(session(sess));
 // turn on routes
 app.use(routes);
 
-//run seeds
-seeds()
+
 
 // turn on connection to db and server
 sequelize.sync({ force: false }).then(() => {
